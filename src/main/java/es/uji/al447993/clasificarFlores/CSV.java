@@ -28,11 +28,11 @@ public class CSV {
             while((linea = br.readLine()) != null) {
                 String[] elementos = linea.split(",");
                 Row row = new Row();
-                for (int i = 0; i < elementos.length; i++) {
+                for (String elemento : elementos) {
                     if (numLinea == 0)
-                        headers.add(elementos[i]);
+                        headers.add(elemento);
                     else
-                        row.addData(Double.parseDouble(elementos[i]));
+                        row.addData(Double.parseDouble(elemento));
                 }
                 if (numLinea != 0)
                     rows.add(row);
