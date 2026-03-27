@@ -11,18 +11,20 @@ public class KMeans {
     private int numClusters;
     private int numIterations;
     private long seed;
+    private List<List<Double>> centroides;
 
     public KMeans(int numClusters, int numIterations, long seed) {
         this.numClusters = numClusters;
         this.numIterations = numIterations;
         this.seed = seed;
+        this.centroides = new ArrayList<>();
     }
 
 
     public void train(Table datos) {
         Random random = new Random(seed);
         Set<Integer> representantes = new HashSet<>();
-        List<List<Double>> centroides = new ArrayList<>();
+        this.centroides = centroides;
         Map<Integer,List<Row>> grupos = new HashMap<>();
         int num = 0;
 
@@ -46,6 +48,7 @@ public class KMeans {
                 int mejorGrupo = -1;
                 double minDist = Double.MAX_VALUE;
 
+                //Buscamos el centroide más cercano
                 for (int k = 0; k < numClusters; k++) {
                     //En KNN ya tenemos el metodo para calcular distancias, por lo que lo cogemos
                     //de allí.
@@ -57,6 +60,7 @@ public class KMeans {
                     }
                 }
 
+                //Añadimos este al grupo
                 grupos.get(mejorGrupo + 1).add(actual);
                 //Le sumamos uno al grupo porque nuestros grupos van de 1 a numClusters
                 // (no empiezan por el 0) y por tanto, el número de grupo del mapa siempre
@@ -88,6 +92,24 @@ public class KMeans {
 
         }
 
+    }
+
+    public Integer estimate(List<Double> dato) {
+        int mejorGrupo = -1;
+        double minDist = Double.MAX_VALUE;
+
+        //Buscamos el centroide más cercano
+        for (int k = 0; k < numClusters; k++) {
+            //En KNN ya tenemos el metodo para calcular distancias, por lo que lo cogemos
+            //de allí.
+            double dist = KNN.calcularDistancia(dato, centroides.get(k));
+
+            if (dist < minDist) {
+                minDist = dist;
+                mejorGrupo = k;
+            }
+        }
+        return -1;
     }
 
 
