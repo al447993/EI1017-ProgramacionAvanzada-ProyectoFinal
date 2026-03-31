@@ -2,11 +2,10 @@ package es.uji.al447993.clasificarFlores.algorithms;
 
 import es.uji.al447993.clasificarFlores.rows.Row;
 import es.uji.al447993.clasificarFlores.tables.Table;
-import es.uji.al447993.clasificarFlores.algorithms.KNN;
 
 import java.util.*;
 
-public class KMeans {
+public class KMeans implements Algorithms<Table,List<Double>,Integer> {
     private Table data;
     private int numClusters;
     private int numIterations;
@@ -20,7 +19,7 @@ public class KMeans {
         this.centroides = new ArrayList<>();
     }
 
-
+    @Override
     public void train(Table datos) {
         Random random = new Random(seed);
         Set<Integer> representantes = new HashSet<>();
@@ -94,6 +93,8 @@ public class KMeans {
 
     }
 
+
+    @Override
     public Integer estimate(List<Double> dato) {
         int mejorGrupo = -1;
         double minDist = Double.MAX_VALUE;

@@ -42,4 +42,9 @@ public class TableWithLabels extends Table {
             }
         }
     }
+
+    @Override
+    public Integer getRowCount() {
+        return super.getRowCount();
+    }
 }

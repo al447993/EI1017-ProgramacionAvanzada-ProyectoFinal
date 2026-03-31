@@ -5,15 +5,17 @@ import es.uji.al447993.clasificarFlores.tables.TableWithLabels;
 
 import java.util.List;
 
-public class KNN {
+public class KNN implements Algorithms<TableWithLabels,List<Double>,Integer> {
 
     private TableWithLabels data;
 
     //Almacenamiento de los datos
+    @Override
     public void train(TableWithLabels data) {
         this.data = data;
     }
 
+    @Override
     public Integer estimate(List<Double> sample) {
 
         double minDist = Double.MAX_VALUE;
@@ -33,6 +35,7 @@ public class KNN {
         RowWithLabel nearest = data.getRowAt(bestIndex);
         return data.getLabelAsInteger(nearest.getLabel());
     }
+
 
     public static double calcularDistancia(List<Double> sample, List<Double> rowData) {
         double suma = 0.0;
