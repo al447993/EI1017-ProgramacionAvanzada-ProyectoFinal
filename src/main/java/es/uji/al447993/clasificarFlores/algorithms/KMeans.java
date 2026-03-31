@@ -110,7 +110,7 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
                 mejorGrupo = k;
             }
         }
-        return -1;
+        return mejorGrupo;
     }
 
 
