@@ -2,11 +2,9 @@ package es.uji.al447993.clasificarFlores;
 
 import es.uji.al447993.clasificarFlores.algorithms.Algorithms;
 import es.uji.al447993.clasificarFlores.tables.Table;
+import es.uji.al447993.clasificarFlores.excepciones.LikedItemNotFoundException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RecSys {
     //Atributos
@@ -32,7 +30,26 @@ public class RecSys {
     }
 
     public List<String> recommend(String nameLikedItem, int numRecommendations) {
-        return new ArrayList<>();
+        Integer gusto;
+
+        if (recommend.containsKey(nameLikedItem))
+            gusto = recommend.get(nameLikedItem);
+        else
+            throw new LikedItemNotFoundException("El elemento " + nameLikedItem + " no existe");
+
+        List<String> catalogo_recommend = new ArrayList<>();
+        Set<String> nombres = recommend.keySet();
+
+        for (String nombrePosible : nombres) {
+            if(recommend.get(nombrePosible).equals(gusto) && !(nombrePosible.equals(nameLikedItem))) {
+                catalogo_recommend.add(nombrePosible);
+            }
+
+            if (catalogo_recommend.size() == numRecommendations)
+                break;
+        }
+
+        return catalogo_recommend;
     }
 
 }

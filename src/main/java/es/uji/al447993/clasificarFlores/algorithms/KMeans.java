@@ -2,6 +2,7 @@ package es.uji.al447993.clasificarFlores.algorithms;
 
 import es.uji.al447993.clasificarFlores.rows.Row;
 import es.uji.al447993.clasificarFlores.tables.Table;
+import es.uji.al447993.clasificarFlores.excepciones.InvalidClusterNumberException;
 
 import java.util.*;
 
@@ -21,6 +22,9 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
 
     @Override
     public void train(Table datos) {
+        if (numClusters > datos.getRowCount())
+            throw new InvalidClusterNumberException(datos.getRowCount(), numClusters);
+
         Random random = new Random(seed);
         Set<Integer> representantes = new HashSet<>();
         this.centroides = centroides;

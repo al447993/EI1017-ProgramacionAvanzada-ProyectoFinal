@@ -1,10 +1,18 @@
-/**
-// TODO: Remplazar <nombre> por el nombre de tu paquete
-package <nombre>;
+package es.uji.al447993.clasificarFlores.tests;
 
-// TODO: Pon los imports especificos a tu proyecto
+import es.uji.al447993.clasificarFlores.CSV;
+import es.uji.al447993.clasificarFlores.RecSys;
+import es.uji.al447993.clasificarFlores.tables.Table;
+import es.uji.al447993.clasificarFlores.algorithms.Algorithms;
+import es.uji.al447993.clasificarFlores.algorithms.KMeans;
+import es.uji.al447993.clasificarFlores.algorithms.KNN;
+import es.uji.al447993.clasificarFlores.excepciones.LikedItemNotFoundException;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Nested;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,11 +26,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class RecSysTest {
 
     private String separator = System.getProperty("file.separator");
-    // TODO: cambiar ruta si hace falta
-    private String songsFolder = "recommender";
+    private String songsFolder = "recsys";
 
     private RecSys recSys;
-    private Algorithm algorithm;
+    private Algorithms algorithm;
 
     private Table trainTable;
     private Table testTable;
@@ -43,7 +50,6 @@ class RecSysTest {
     class KNNRecSys {
 
         @BeforeEach
-        // TODO: añadir o eliminar excepciones según tu implementación
         void setUp() throws IOException, URISyntaxException {
             trainTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_train.csv");
             testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test.csv");
@@ -88,7 +94,6 @@ class RecSysTest {
         private long seed = 53;
 
         @BeforeEach
-        // TODO: añadir o eliminar excepciones según tu implementación
         void setUp() throws IOException, URISyntaxException {
             trainTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_train_withoutnames.csv");
             testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test_withoutnames.csv");
@@ -137,4 +142,3 @@ class RecSysTest {
         return names;
     }
 }
- **/

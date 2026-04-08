@@ -1,8 +1,9 @@
-/**package es.uji.al447993.clasificarFlores.tests;
+package es.uji.al447993.clasificarFlores.tests;
 
 import es.uji.al447993.clasificarFlores.CSV;
 import es.uji.al447993.clasificarFlores.tables.TableWithLabels;
 import es.uji.al447993.clasificarFlores.algorithms.KMeans;
+import es.uji.al447993.clasificarFlores.excepciones.InvalidClusterNumberException;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,8 +60,7 @@ class KMeansTest {
     void train_invalidClusters() {
         kMeans = new KMeans(200, numIterations, seed);
         Exception e = assertThrows(InvalidClusterNumberException.class, () -> kMeans.train(iris));
-        System.out.println("Clusters: "+((InvalidClusterNumberException)e).getNumberOfCusters());
-        assertTrue(((InvalidClusterNumberException)e).getNumberOfCusters() > iris.getRowCount());
+        System.out.println("Clusters: "+((InvalidClusterNumberException)e).getNumberOfClusters());
+        assertTrue(((InvalidClusterNumberException)e).getNumberOfClusters() > iris.getRowCount());
     }
 }
- **/
