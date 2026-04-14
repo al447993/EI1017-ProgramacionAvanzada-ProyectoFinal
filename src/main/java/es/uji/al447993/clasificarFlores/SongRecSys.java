@@ -1,15 +1,11 @@
-package es.uji.matey;
+package es.uji.al447993.clasificarFlores;
 
-import es.uji.matey.algorithms.Algorithm;
-import es.uji.matey.algorithms.KNN;
-import es.uji.matey.algorithms.KMeans;
-import es.uji.matey.data.CSV;
-import es.uji.matey.data.table.Table;
-import es.uji.matey.recommender.RecSys;
+import es.uji.al447993.clasificarFlores.algorithms.Algorithms;
+import es.uji.al447993.clasificarFlores.algorithms.KNN;
+import es.uji.al447993.clasificarFlores.algorithms.KMeans;
+import es.uji.al447993.clasificarFlores.tables.Table;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -19,17 +15,17 @@ class SongRecSys {
 
     SongRecSys(String method) throws Exception {
         String sep = System.getProperty("file.separator");
-        String ruta = "recommender";
+        String ruta = "recsys";
 
         // File names (could be provided as arguments to the constructor to be more general)
         Map<String,String> filenames = new HashMap<>();
         filenames.put("knn"+"train",ruta+sep+"songs_train.csv");
         filenames.put("knn"+"test",ruta+sep+"songs_test.csv");
-        filenames.put("kmeans"+"train",ruta+sep+"songs_train_withoutnames.csv");
-        filenames.put("kmeans"+"test",ruta+sep+"songs_test_withoutnames.csv");
+        filenames.put("kmeans" +"train",ruta+sep+"songs_train_withoutnames.csv");
+        filenames.put("kmeans" +"test",ruta+sep+"songs_test_withoutnames.csv");
 
         // Algorithms
-        Map<String, Algorithm> algorithms = new HashMap<>();
+        Map<String, Algorithms> algorithms = new HashMap<>();
         algorithms.put("knn",new KNN());
         algorithms.put("kmeans",new KMeans(15, 200, 4321));
 
