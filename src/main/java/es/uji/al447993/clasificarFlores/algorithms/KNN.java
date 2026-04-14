@@ -2,7 +2,6 @@ package es.uji.al447993.clasificarFlores.algorithms;
 
 import es.uji.al447993.clasificarFlores.rows.RowWithLabel;
 import es.uji.al447993.clasificarFlores.tables.TableWithLabels;
-import es.uji.al447993.clasificarFlores.calcularDistancias.EuclideanDistance;
 
 import java.util.List;
 
@@ -25,8 +24,7 @@ public class KNN implements Algorithms<TableWithLabels,List<Double>,Integer> {
         for (int i = 0; i < data.getRowCount(); i++) {
 
             List<Double> rowData = data.getRowAt(i).getData();
-            EuclideanDistance dist = new EuclideanDistance(sample, rowData);
-            double distancia = dist.calcularDistEucli();
+            double distancia = calcularDistancia(sample, rowData);
 
             if (distancia < minDist) {
                 minDist = distancia;
@@ -39,4 +37,14 @@ public class KNN implements Algorithms<TableWithLabels,List<Double>,Integer> {
     }
 
 
+    public static double calcularDistancia(List<Double> sample, List<Double> rowData) {
+        double suma = 0.0;
+
+        for (int j = 0; j < sample.size(); j++) {
+            double diff = sample.get(j) - rowData.get(j);
+            suma += diff * diff;
+        }
+
+        return Math.sqrt(suma);
+    }
 }
