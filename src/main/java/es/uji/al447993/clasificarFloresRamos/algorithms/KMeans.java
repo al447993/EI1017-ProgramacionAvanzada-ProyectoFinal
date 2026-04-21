@@ -1,5 +1,7 @@
 package es.uji.al447993.clasificarFloresRamos.algorithms;
 
+import es.uji.al447993.clasificarFloresRamos.interfaces.Algorithms;
+import es.uji.al447993.clasificarFloresRamos.interfaces.Distance;
 import es.uji.al447993.clasificarFloresRamos.rows.Row;
 import es.uji.al447993.clasificarFloresRamos.tables.Table;
 import es.uji.al447993.clasificarFloresRamos.excepciones.InvalidClusterNumberException;
@@ -12,6 +14,7 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
     private int numIterations;
     private long seed;
     private List<List<Double>> centroides;
+    private Distance distancia;
 
     public KMeans(int numClusters, int numIterations, long seed) {
         this.numClusters = numClusters;
@@ -55,7 +58,7 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
                 for (int k = 0; k < numClusters; k++) {
                     //En KNN ya tenemos el metodo para calcular distancias, por lo que lo cogemos
                     //de allí.
-                    double dist = KNN.calcularDistancia(actual.getData(), centroides.get(k));
+                    double dist = distancia.calculateDistance(actual.getData(), centroides.get(k));
 
                     if (dist < minDist) {
                         minDist = dist;
@@ -107,7 +110,7 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
         for (int k = 0; k < numClusters; k++) {
             //En KNN ya tenemos el metodo para calcular distancias, por lo que lo cogemos
             //de allí.
-            double dist = KNN.calcularDistancia(dato, centroides.get(k));
+            double dist = distancia.calculateDistance(dato, centroides.get(k));
 
             if (dist < minDist) {
                 minDist = dist;

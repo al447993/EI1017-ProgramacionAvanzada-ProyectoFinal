@@ -1,4 +1,4 @@
-package es.uji.al447993.clasificarFloresRamos.algorithms;
+package es.uji.al447993.clasificarFloresRamos.interfaces;
 
 import es.uji.al447993.clasificarFloresRamos.tables.Table;
 

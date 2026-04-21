@@ -1,6 +1,6 @@
 package es.uji.al447993.clasificarFloresRamos;
 
-import es.uji.al447993.clasificarFloresRamos.algorithms.Algorithms;
+import es.uji.al447993.clasificarFloresRamos.interfaces.Algorithms;
 import es.uji.al447993.clasificarFloresRamos.algorithms.KNN;
 import es.uji.al447993.clasificarFloresRamos.algorithms.KMeans;
 import es.uji.al447993.clasificarFloresRamos.tables.Table;
