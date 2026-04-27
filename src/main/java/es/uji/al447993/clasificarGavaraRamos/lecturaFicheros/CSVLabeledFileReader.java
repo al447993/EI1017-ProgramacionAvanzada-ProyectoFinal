@@ -3,9 +3,9 @@ package es.uji.al447993.clasificarGavaraRamos.lecturaFicheros;
 import es.uji.al447993.clasificarGavaraRamos.rows.RowWithLabel;
 import es.uji.al447993.clasificarGavaraRamos.tables.TableWithLabels;
 
-public class CSVLabeledFileReader extends FileReader {
+public class CSVLabeledFileReader extends FileReader<TableWithLabels> {
 
-    public CSVLabeledFileReader() {
+    public CSVLabeledFileReader(String s) {
         tabla = new TableWithLabels();
     }
 
@@ -16,7 +16,9 @@ public class CSVLabeledFileReader extends FileReader {
         for (int i = 0; i < elementos.length - 1; i++)
             row.addData(Double.parseDouble(elementos[i]));
         row.setLabel(elementos[elementos.length - 1]);
-        rows.add(row);
+        tabla.addRow(row);
+        // lo MODIFIQUE PORQUE SOLO AÑADIMOS LA LINEA, PERO A DONDE ??? NUNCA LA AGREGAMOS A UNA TABLA
+        // rows.add(row);
     }
 
     @Override

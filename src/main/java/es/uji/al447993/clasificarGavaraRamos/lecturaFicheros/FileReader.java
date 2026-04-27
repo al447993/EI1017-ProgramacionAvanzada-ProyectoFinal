@@ -2,10 +2,12 @@ package es.uji.al447993.clasificarGavaraRamos.lecturaFicheros;
 
 import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class FileReader<T extends Table> extends ReaderTemplate{
+public abstract class FileReader<T extends Table> extends ReaderTemplate {
     private Scanner sc;
 
     public FileReader() {
@@ -15,7 +17,15 @@ public abstract class FileReader<T extends Table> extends ReaderTemplate{
 
     @Override
     void openSource(String source) {
-        sc = new Scanner(getClass().getClassLoader().getResourceAsStream(source));
+        try {
+            // Esto busca el archivo en la carpeta real de tu disco duro
+            File file = new File(source);
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            // Si no encuentra el archivo, aquí te dirá por qué
+            System.err.println("No se encontró el archivo en: " + source);
+            e.printStackTrace();
+        }
     }
 
     abstract void processHeaders(String headers);

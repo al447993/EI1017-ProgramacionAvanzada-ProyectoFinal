@@ -1,9 +1,7 @@
-/*
-// TODO: Remplazar <nombre> por el nombre de tu paquete
-package <nombre>;
+package es.uji.al447993.clasificarGavaraRamos.tests;
 
-// TODO: Pon los imports especificos a tu proyecto
-
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSVUnlabeledFileReader;
+import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +16,7 @@ class CSVUnlabeledFileReaderTest {
 
     @BeforeEach
     void setUp() {
-        reader = new CSVUnlabeledFileReader("miles_dollars.csv");
+        reader = new CSVUnlabeledFileReader("src/main/resources/miles_dollars.csv");
     }
 
     @AfterEach
@@ -29,7 +27,7 @@ class CSVUnlabeledFileReaderTest {
     // TODO: Dependiendo de cómo manejas las excepciones, puedes añadir un try/catch o un lanzamiento de excepción aquí.
     @Test
     void readTableFromSource() {
-        Table table = reader.readTableFromSource();
+        Table table = reader.readTableFromSource("src/main/resources/miles_dollars.csv");
 
         // assert that the table is not null
         assertNotNull(table);
@@ -43,9 +41,9 @@ class CSVUnlabeledFileReaderTest {
         assertEquals(List.of("Miles", "Dollars"), table.getHeaders());
 
         // assert that the first and last row are correctly read
-        assertEquals(List.of(1211.0,1802.0), table.getRowAt(0).getData());
-        assertEquals(List.of(5439.0,6964.0), table.getRowAt(24).getData());
+        assertEquals(List.of(1211.0, 1802.0), table.getRowAt(0).getData());
+        assertEquals(List.of(5439.0, 6964.0), table.getRowAt(24).getData());
         // assert that an arbitrary row is correctly read
-        assertEquals(List.of(3852.0,4801.0), table.getRowAt(16).getData());
+        assertEquals(List.of(3852.0, 4801.0), table.getRowAt(16).getData());
     }
 }

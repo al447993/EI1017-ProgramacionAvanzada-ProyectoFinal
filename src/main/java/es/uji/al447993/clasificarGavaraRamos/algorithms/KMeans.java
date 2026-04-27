@@ -1,5 +1,7 @@
 package es.uji.al447993.clasificarGavaraRamos.algorithms;
 
+import es.uji.al447993.clasificarGavaraRamos.distancia.EuclideanDistance;
+import es.uji.al447993.clasificarGavaraRamos.distancia.ManhattanDistance;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Algorithms;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Distance;
 import es.uji.al447993.clasificarGavaraRamos.rows.Row;
@@ -8,7 +10,7 @@ import es.uji.al447993.clasificarGavaraRamos.excepciones.InvalidClusterNumberExc
 
 import java.util.*;
 
-public class KMeans implements Algorithms<Table,List<Double>,Integer> {
+public class KMeans implements Algorithms<Table, List<Double>, Integer> {
     private Table data;
     private int numClusters;
     private int numIterations;
@@ -21,6 +23,9 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
         this.numIterations = numIterations;
         this.seed = seed;
         this.centroides = new ArrayList<>();
+        //this.distancia = new EuclideanDistance();
+        this.distancia = new ManhattanDistance();
+
     }
 
     @Override
@@ -31,7 +36,7 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
         Random random = new Random(seed);
         Set<Integer> representantes = new HashSet<>();
         this.centroides = centroides;
-        Map<Integer,List<Row>> grupos = new HashMap<>();
+        Map<Integer, List<Row>> grupos = new HashMap<>();
         int num = 0;
 
         //Elegimos muestras al azar igual a los grupos que me marca que tengo
@@ -89,7 +94,7 @@ public class KMeans implements Algorithms<Table,List<Double>,Integer> {
                     for (Row row : puntos)
                         sumaColumna += row.getData().get(k);
 
-                    sumas.add(sumaColumna/puntos.size());
+                    sumas.add(sumaColumna / puntos.size());
                 }
 
                 centroides.set(mejorGrupo, sumas);

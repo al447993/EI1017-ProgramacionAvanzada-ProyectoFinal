@@ -9,7 +9,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 
 @Suite
 @SuiteDisplayName("Lanzar todos los tests")
-@SelectPackages({"es.uji.al447993.clasificarFloresRamos.tests"})
+@SelectPackages({"es.uji.al447993.clasificarGavaraRamos.tests"})
 @IncludeClassNamePatterns(".*Test")
 public class TestSuite {
 }

@@ -3,6 +3,7 @@ package es.uji.al447993.clasificarGavaraRamos.tables;
 import es.uji.al447993.clasificarGavaraRamos.rows.Row;
 import es.uji.al447993.clasificarGavaraRamos.rows.RowWithLabel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,12 @@ import java.util.Map;
 
 public class TableWithLabels extends Table {
 
-    private List<RowWithLabel> rows;
-    private Map<String,Integer> labelsToIndex;
+    private Map<String, Integer> labelsToIndex;
 
-    public TableWithLabels(){
-        headers = null;
-        rows = null;
+    // Estaban inicialiadas en null, por lo que nunca ibamos a llegar a obetener algun objeto
+    public TableWithLabels() {
+        super();
+        labelsToIndex = new HashMap<>();
     }
 
     public TableWithLabels(List<String> headers, List<RowWithLabel> filas) {
@@ -39,7 +40,7 @@ public class TableWithLabels extends Table {
     }
 
     @Override
-    public void addRow (Row row) {
+    public void addRow(Row row) {
         super.addRow(row);
         if (row instanceof RowWithLabel) {
             String label = ((RowWithLabel) row).getLabel();

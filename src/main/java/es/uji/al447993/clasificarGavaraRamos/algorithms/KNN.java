@@ -1,5 +1,7 @@
 package es.uji.al447993.clasificarGavaraRamos.algorithms;
 
+import es.uji.al447993.clasificarGavaraRamos.distancia.EuclideanDistance;
+import es.uji.al447993.clasificarGavaraRamos.distancia.ManhattanDistance;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Algorithms;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Distance;
 import es.uji.al447993.clasificarGavaraRamos.rows.RowWithLabel;
@@ -7,10 +9,11 @@ import es.uji.al447993.clasificarGavaraRamos.tables.TableWithLabels;
 
 import java.util.List;
 
-public class KNN implements Algorithms<TableWithLabels,List<Double>,Integer> {
+public class KNN implements Algorithms<TableWithLabels, List<Double>, Integer> {
 
     private TableWithLabels data;
-    private Distance distancia;
+    //private Distance distancia = new EuclideanDistance();
+    private Distance distancia = new ManhattanDistance();
 
     //Almacenamiento de los datos
     @Override

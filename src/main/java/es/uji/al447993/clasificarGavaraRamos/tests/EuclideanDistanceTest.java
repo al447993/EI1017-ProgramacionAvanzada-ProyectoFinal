@@ -1,10 +1,7 @@
-/*
-// TODO: Remplazar <nombre> por el nombre de tu paquete
-package <nombre>;
+package es.uji.al447993.clasificarGavaraRamos.tests;
 
-// TODO: Pon los imports especificos a tu proyecto
-
-
+import es.uji.al447993.clasificarGavaraRamos.distancia.EuclideanDistance;
+import es.uji.al447993.clasificarGavaraRamos.interfaces.Distance;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

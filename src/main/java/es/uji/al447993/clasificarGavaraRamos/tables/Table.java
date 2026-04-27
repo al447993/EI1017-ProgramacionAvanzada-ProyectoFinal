@@ -11,12 +11,13 @@ public class Table {
     private List<Row> rows; //El resto de la tabla que no son headers (todas las filas)
 
     //Constructores
-    public Table(){
-        headers = null;
-        rows = null;
+    public Table() {
+        headers = new ArrayList<>();
+        rows = new ArrayList<>();
     }
+
     public Table(List<String> headers, List<? extends Row> filas) {
-        this.headers = headers;
+        this.headers = new ArrayList<>(headers);
         this.rows = new ArrayList<>(filas);
         //En filas lo hacemos así para poder utilizar la clase hija de Row
     }
@@ -31,7 +32,7 @@ public class Table {
     // Ej: Columna 0, elemento de cada row en la posición 0
     public List<Double> getColumnAt(int columnNumber) {
         List<Double> column = new ArrayList<>();
-        for ( Row row : rows) {
+        for (Row row : rows) {
             column.add(row.getData().get(columnNumber));
         }
         return column;
