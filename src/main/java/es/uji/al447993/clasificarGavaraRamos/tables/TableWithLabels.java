@@ -10,7 +10,13 @@ import java.util.Map;
 
 public class TableWithLabels extends Table {
 
+    private List<RowWithLabel> rows;
     private Map<String,Integer> labelsToIndex;
+
+    public TableWithLabels(){
+        headers = null;
+        rows = null;
+    }
 
     public TableWithLabels(List<String> headers, List<RowWithLabel> filas) {
         super(headers, filas);

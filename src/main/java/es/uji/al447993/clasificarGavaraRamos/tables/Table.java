@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Table {
-    //Atributos
-    private List<String> headers;
+    //Atributos protected para que TableWithLabels pueda acceder a ellos
+    protected List<String> headers;
     private List<Row> rows; //El resto de la tabla que no son headers (todas las filas)
 
     //Constructores
@@ -48,6 +48,7 @@ public class Table {
     public void addRow(Row row) {
         this.rows.add(row);
     }
+
     public void addHeaders(String header) {
         headers.add(header);
     }

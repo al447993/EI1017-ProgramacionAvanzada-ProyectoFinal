@@ -2,11 +2,16 @@ package es.uji.al447993.clasificarGavaraRamos.lecturaFicheros;
 
 import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class FileReader<T extends Table> extends ReaderTemplate{
     private Scanner sc;
-    private T tabla;
+
+    public FileReader() {
+        rows = new ArrayList<>();
+        headers = new ArrayList<>();
+    }
 
     @Override
     void openSource(String source) {
@@ -24,9 +29,7 @@ public abstract class FileReader<T extends Table> extends ReaderTemplate{
 
     @Override
     boolean hasMoreData() {
-        if (sc.hasNextLine())
-            return true;
-        return false;
+        return sc.hasNextLine();
     }
 
     @Override

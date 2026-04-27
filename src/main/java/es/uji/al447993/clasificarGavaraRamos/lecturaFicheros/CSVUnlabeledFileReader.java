@@ -5,14 +5,11 @@ import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class CSVUnlabeledFileReader extends FileReader{
-    private List<Row> rows;
-    private List<String> headers;
 
     public CSVUnlabeledFileReader() {
-        rows = new ArrayList<>();
+        tabla = new Table();
     }
 
     @Override
@@ -22,12 +19,13 @@ public class CSVUnlabeledFileReader extends FileReader{
         for (String elemento : elementos) {
             row.addData(Double.parseDouble(elemento));
         }
-        rows.add(row);
+        tabla.addRow(row);
     }
 
     @Override
     void processHeaders(String headers) {
-        this.headers = new ArrayList<String>(Arrays.asList(headers.split(",")));
+        this.headers = new ArrayList<String>(Arrays.asList(headers.split(SEPARADOR)));
+        tabla.addHeaders(headers);
     }
 
 
