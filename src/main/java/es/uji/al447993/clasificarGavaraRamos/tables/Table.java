@@ -38,7 +38,7 @@ public class Table {
     }
 
     public Integer getRowCount() {
-        return rows.size();
+        return (Integer) rows.size();
     }
 
     public List<String> getHeaders() {
@@ -47,5 +47,8 @@ public class Table {
 
     public void addRow(Row row) {
         this.rows.add(row);
+    }
+    public void addHeaders(String header) {
+        headers.add(header);
     }
 }

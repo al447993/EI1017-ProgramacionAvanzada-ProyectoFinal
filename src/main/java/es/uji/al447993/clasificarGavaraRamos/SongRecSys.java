@@ -3,6 +3,7 @@ package es.uji.al447993.clasificarGavaraRamos;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Algorithms;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KNN;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KMeans;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSV;
 import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
 import java.io.File;

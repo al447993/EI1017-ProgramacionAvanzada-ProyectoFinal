@@ -1,6 +1,6 @@
 package es.uji.al447993.clasificarGavaraRamos.tests;
 
-import es.uji.al447993.clasificarGavaraRamos.CSV;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSV;
 import es.uji.al447993.clasificarGavaraRamos.tables.TableWithLabels;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KNN;
 
