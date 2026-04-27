@@ -13,11 +13,7 @@ public abstract class FileReader<T extends Table> extends ReaderTemplate{
         sc = new Scanner(getClass().getClassLoader().getResourceAsStream(source));
     }
 
-    @Override
-    void processHeaders(String headers) {
-        headers.split(",");
-        tabla.addHeaders(headers);
-    }
+    abstract void processHeaders(String headers);
 
     abstract void processData(String data);
 
