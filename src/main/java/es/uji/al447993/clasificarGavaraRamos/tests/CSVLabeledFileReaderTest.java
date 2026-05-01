@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,9 +25,8 @@ class CSVLabeledFileReaderTest {
         reader = null;
     }
 
-    // TODO: Dependiendo de cómo manejas las excepciones, puedes añadir un try/catch o un lanzamiento de excepción aquí.    
     @Test
-    void readTableFromSource() {
+    void readTableFromSource() throws IOException {
         TableWithLabels table = (TableWithLabels) reader.readTableFromSource("src/main/resources/iris.csv");
         // assert that the table is not null
         assertNotNull(table);

@@ -5,34 +5,30 @@ import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class CSVUnlabeledFileReader extends FileReader {
+    public CSVUnlabeledFileReader(String source) {
+        super(source);
+    }
 
-    public CSVUnlabeledFileReader(String s) {
-        tabla = new Table();
+    public CSVUnlabeledFileReader() {
+        super();
+    }
+    @Override
+    protected void processHeaders(String headers) {
+        List<String> headerList = new ArrayList<>(Arrays.asList(headers.split(",")));
+        this.tabla = new Table(headerList, new ArrayList<>());
     }
 
     @Override
-    void processData(String data) {
+    protected void processData(String data) {
         String[] elementos = data.split(",");
         Row row = new Row();
         for (String elemento : elementos) {
             row.addData(Double.parseDouble(elemento));
         }
-        tabla.addRow(row);
-    }
-
-    // Lo modificamos por el separados split, que elimina los espacios para que no den errores.
-
-    @Override
-    void processHeaders(String headers) {
-        // Dividimos la línea por la coma
-        String[] elementos = headers.split(SEPARADOR);
-
-        for (String elemento : elementos) {
-            // .trim() es la clave: convierte " Dollars" en "Dollars"
-            tabla.addHeaders(elemento.trim());
-        }
+        this.tabla.addRow(row); // Asumiendo que Table tiene addRow
     }
 
 

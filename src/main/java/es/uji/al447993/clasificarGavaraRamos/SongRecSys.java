@@ -3,7 +3,8 @@ package es.uji.al447993.clasificarGavaraRamos;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Algorithms;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KNN;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KMeans;
-import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSV;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSVLabeledFileReader;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSVUnlabeledFileReader;
 import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
 import java.io.File;
@@ -32,12 +33,13 @@ class SongRecSys {
 
         // Tables
         Map<String, Table> tables = new HashMap<>();
-        String [] stages = {"train", "test"};
-        CSV csv = new CSV();
-        for (String stage : stages) {
-            tables.put("knn" + stage, csv.readTableWithLabels(filenames.get("knn" + stage)));
-            tables.put("kmeans" + stage, csv.readTable(filenames.get("kmeans" + stage)));
-        }
+        CSVLabeledFileReader labeledReader = new CSVLabeledFileReader();
+        CSVUnlabeledFileReader unlabeledReader = new CSVUnlabeledFileReader();
+
+        tables.put("knn" + "train", labeledReader.readTableFromSource(filenames.get("knn" + "train")));
+        tables.put("knn" + "test", labeledReader.readTableFromSource(filenames.get("knn" + "test")));
+        tables.put("kmeans" + "train", unlabeledReader.readTableFromSource(filenames.get("kmeans" + "train")));
+        tables.put("kmeans" + "test", unlabeledReader.readTableFromSource(filenames.get("kmeans" + "test")));
 
         // Names of items
         List<String> names = readNames(ruta+sep+"songs_test_names.csv");

@@ -1,6 +1,6 @@
 package es.uji.al447993.clasificarGavaraRamos.tests;
 
-import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSV;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSVLabeledFileReader;
 import es.uji.al447993.clasificarGavaraRamos.tables.TableWithLabels;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KMeans;
 import es.uji.al447993.clasificarGavaraRamos.excepciones.InvalidClusterNumberException;
@@ -26,7 +26,9 @@ class KMeansTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        iris = new CSV().readTableWithLabels("iris.csv");
+        CSVLabeledFileReader reader = new CSVLabeledFileReader();
+        iris = (TableWithLabels) reader.readTableFromSource("iris.csv");
+
         kMeans = new KMeans(irisClusters, numIterations, seed);
         kMeans.train(iris);
     }

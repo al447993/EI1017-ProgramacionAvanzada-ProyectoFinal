@@ -1,7 +1,8 @@
 package es.uji.al447993.clasificarGavaraRamos.tests;
 
-import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSV;
 import es.uji.al447993.clasificarGavaraRamos.RecSys;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSVLabeledFileReader;
+import es.uji.al447993.clasificarGavaraRamos.lecturaFicheros.CSVUnlabeledFileReader;
 import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 import es.uji.al447993.clasificarGavaraRamos.interfaces.Algorithms;
 import es.uji.al447993.clasificarGavaraRamos.algorithms.KMeans;
@@ -51,8 +52,9 @@ class RecSysTest {
 
         @BeforeEach
         void setUp() throws IOException, URISyntaxException {
-            trainTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_train.csv");
-            testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test.csv");
+            CSVLabeledFileReader reader = new CSVLabeledFileReader();
+            trainTable = reader.readTableFromSource(songsFolder + separator + "songs_train.csv");
+            testTable = reader.readTableFromSource(songsFolder + separator + "songs_test.csv");
             testItemNames = readNames(songsFolder + separator + "songs_test_names.csv");
 
             algorithm = new KNN();
@@ -95,8 +97,9 @@ class RecSysTest {
 
         @BeforeEach
         void setUp() throws IOException, URISyntaxException {
-            trainTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_train_withoutnames.csv");
-            testTable = new CSV().readTableWithLabels(songsFolder + separator + "songs_test_withoutnames.csv");
+            CSVUnlabeledFileReader reader = new CSVUnlabeledFileReader();
+            trainTable = reader.readTableFromSource(songsFolder + separator + "songs_train_withoutnames.csv");
+            testTable = reader.readTableFromSource(songsFolder + separator + "songs_test_withoutnames.csv");
             testItemNames = readNames(songsFolder + separator + "songs_test_names.csv");
 
             algorithm = new KMeans(numClusters, numIterations, seed);

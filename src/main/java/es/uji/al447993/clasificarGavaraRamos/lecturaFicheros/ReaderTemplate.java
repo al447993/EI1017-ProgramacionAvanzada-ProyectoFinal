@@ -3,20 +3,22 @@ package es.uji.al447993.clasificarGavaraRamos.lecturaFicheros;
 import es.uji.al447993.clasificarGavaraRamos.rows.Row;
 import es.uji.al447993.clasificarGavaraRamos.tables.Table;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public abstract class ReaderTemplate<T extends Table> {
     // Ponemos todos los atributos a protected para que las clases hijas puedan acceder a ellos.
     protected T tabla;
     protected List<? extends Row> rows;
-    protected List<String> headers;
     protected String SEPARADOR;
+    protected String source;
 
     public ReaderTemplate() {
         SEPARADOR = ",";
     }
 
-    abstract void openSource(String source);
+    abstract void openSource(String source) throws FileNotFoundException;
     abstract void processHeaders(String headers);
     abstract void processData(String data);
     abstract void closeSource();
@@ -25,7 +27,7 @@ public abstract class ReaderTemplate<T extends Table> {
 
     //Modificar return
     public final T
-    readTableFromSource(String nombreFichero){
+    readTableFromSource(String nombreFichero) throws IOException {
         // Abrimos el fichero
         openSource(nombreFichero);
 
