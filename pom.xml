@@ -31,7 +31,27 @@
             <artifactId>junit-platform-suite-engine</artifactId>
             <version>1.10.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <executable>${java.home}/bin/java</executable>
+                    <mainClass>es.uji.al447993.clasificarGavaraRamos.vista.JavaFXApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
