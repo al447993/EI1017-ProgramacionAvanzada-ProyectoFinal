@@ -8,7 +8,6 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,37 +24,39 @@ public class JavaFXApplication extends Application {
         modelo.setView(view);
         view.setModel(modelo);
 
-        VBox layout = new VBox();
-        ToggleGroup grupo = new ToggleGroup();
-        ToggleButton radio1 = new ToggleButton("EuclideanDistance");
-        ToggleButton radio2 = new ToggleButton("ManhattanDistance");
+        //Creacion de Menbsaje con Botones
+        Label mensaje = new Label("¡Bienvenido a nuestro Proyecto de Programación!");
+        Label nombres = new Label("Presentado por : Sonia Gavara y Julián Ramos");
+        Button btnSiguiente = new Button("Continuar");
 
-        radio1.setOnAction(e -> System.out.println("Selecciona EuclideanDistance"));
-        radio2.setOnAction(e -> System.out.println("Selecciona ManhattanDistance"));
+        // Diseño de Texto y de Boton
+        mensaje.setStyle("-fx-font-size: 28px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-text-fill: #2c3e50; " +
+                "-fx-font-family: 'cursive';");
 
-        radio1.setToggleGroup(grupo);
-        radio2.setToggleGroup(grupo);
+        nombres.setStyle("+fx-font-size: 15px; "
+                + "-fx-font-weight: bold;");
 
-        Label label = new Label("Hola Mundo :D");
-        Button button = new Button("Un Boton :D");
+        btnSiguiente.setStyle("-fx-padding: 10 30 10 30; -fx-font-size: 14px;");
 
-        Label label2 = new Label("Seleccionador de distancias: ");
+        btnSiguiente.setOnAction(e -> {
 
-        HBox hboxDistancia = new HBox(label2, radio1, radio2);
-        hboxDistancia.setSpacing(10);
+            // Abrimos la ventana del JavaMain
+            JavaMain mainWindow = new JavaMain();
+            mainWindow.show();
 
-        hboxDistancia.setLayoutX(500);
-        hboxDistancia.setLayoutY(500);
+            primaryStage.close();
+        });
 
-        label.setLayoutX(1);
-        label.setLayoutY(1);
-        button.setLayoutX(50);
-        button.setLayoutY(50);
+        VBox layout = new VBox(20);
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(mensaje, nombres, btnSiguiente);
 
-        layout.getChildren().addAll(label, button, hboxDistancia);
 
-        primaryStage.setScene(new Scene(layout, 500, 500));
-        primaryStage.setTitle("JavaFXApp");
+        Scene scene = new Scene(layout, 700, 500);
+        primaryStage.setTitle("Programación Avanzada");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
