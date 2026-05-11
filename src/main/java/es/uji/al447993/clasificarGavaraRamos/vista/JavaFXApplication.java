@@ -5,7 +5,9 @@ import es.uji.al447993.clasificarGavaraRamos.controlador.implementacionControlad
 import es.uji.al447993.clasificarGavaraRamos.modelo.Modelo;
 import es.uji.al447993.clasificarGavaraRamos.modelo.implementacionModelo;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -24,35 +26,58 @@ public class JavaFXApplication extends Application {
         modelo.setView(view);
         view.setModel(modelo);
 
-        //Creacion de Menbsaje con Botones
-        Label mensaje = new Label("¡Bienvenido a nuestro Proyecto de Programación!");
-        Label nombres = new Label("Presentado por : Sonia Gavara y Julián Ramos");
+        // 1. Contenedor Principal
+        VBox layout = new VBox(25);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(40));
+
+        // Sintaxis para degradar colores
+        layout.setStyle("-fx-background-color: linear-gradient(to bottom right, #ffffff, #e6f2ff);");
+
+        Label mensaje = new Label("¡Bienvenido a nuestro Proyecto!");
+        mensaje.setStyle(
+                "-fx-font-size: 32px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-text-fill: #1a2a6c; " + // Azul oscuro elegante
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);"
+        );
+
+
+        Label nombres = new Label("Presentado por: Sonia Gavara y Julián Ramos");
+        nombres.setStyle(
+                "-fx-font-size: 16px; " +
+                        "-fx-text-fill: #555555; " +
+                        "-fx-font-style: italic;"
+        );
+
+        // Cursor.HAND para que cuando estemos en el boton se ponga la manito.
         Button btnSiguiente = new Button("Continuar");
+        btnSiguiente.setCursor(Cursor.HAND);
+        String estiloNormal =
+                "-fx-background-color: #005088; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-background-radius: 30; " + // Muy redondeado
+                        "-fx-padding: 12 40 12 40; " +
+                        "-fx-font-size: 15px; " +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);";
 
-        // Diseño de Texto y de Boton
-        mensaje.setStyle("-fx-font-size: 28px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-text-fill: #2c3e50; " +
-                "-fx-font-family: 'cursive';");
+        String estiloHover = estiloNormal + "-fx-background-color: #0070c0;";
 
-        nombres.setStyle("+fx-font-size: 15px; "
-                + "-fx-font-weight: bold;");
+        btnSiguiente.setStyle(estiloNormal);
 
-        btnSiguiente.setStyle("-fx-padding: 10 30 10 30; -fx-font-size: 14px;");
+        // Efectos visuales al pasar el mouse
+        btnSiguiente.setOnMouseEntered(e -> btnSiguiente.setStyle(estiloHover));
+        btnSiguiente.setOnMouseExited(e -> btnSiguiente.setStyle(estiloNormal));
 
+        // Funcionamiento del Boton.
         btnSiguiente.setOnAction(e -> {
-
-            // Abrimos la ventana del JavaMain
             JavaMain mainWindow = new JavaMain();
             mainWindow.show();
-
             primaryStage.close();
         });
 
-        VBox layout = new VBox(20);
-        layout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(mensaje, nombres, btnSiguiente);
-
 
         Scene scene = new Scene(layout, 700, 500);
         primaryStage.setTitle("Programación Avanzada");

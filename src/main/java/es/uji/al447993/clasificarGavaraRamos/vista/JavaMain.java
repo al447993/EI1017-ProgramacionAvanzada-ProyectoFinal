@@ -3,8 +3,7 @@ package es.uji.al447993.clasificarGavaraRamos.vista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -34,50 +33,99 @@ public class JavaMain extends Stage {
         //----------------------------------------------------------------------------------------------------------------------------
         // Bloque superior Izquierdo
 
+        Label labelSuperior = new Label("Selecciona una de estas dos opciones:");
+        labelSuperior.setStyle("-fx-font-weight: bold;");
+
         ToggleGroup grupo = new ToggleGroup();
         ToggleButton dist1 = new ToggleButton("EuclideanDistance");
         ToggleButton dist2 = new ToggleButton("ManhattanDistance");
 
-        dist1.setOnAction(e -> System.out.println("Selecciona EuclideanDistance"));
-        dist2.setOnAction(e -> System.out.println("Selecciona ManhattanDistance"));
+// Estilo circular/redondeado para botones
+        String estiloBoton = "-fx-background-radius: 20; -fx-padding: 5 10;";
+        dist1.setStyle(estiloBoton);
+        dist2.setStyle(estiloBoton);
 
         dist1.setToggleGroup(grupo);
         dist2.setToggleGroup(grupo);
 
-        VBox distancia = new VBox(10, dist1, dist2);
-        distancia.setAlignment(Pos.CENTER);
-        distancia.setStyle("-fx-background-color: white;");
+// HBox para poner los botones uno al lado del otro
+        HBox botonesSup = new HBox(15, dist1, dist2);
+        botonesSup.setAlignment(Pos.CENTER);
 
-        // Agregamos el VBox al bloque superior Izquierdo
-        bloqueSuperior.getChildren().add(distancia);
+// VBox contenedor que agrupa el Texto + el HBox de botones
+        VBox contenedorSuperior = new VBox(15, labelSuperior, botonesSup);
+        contenedorSuperior.setAlignment(Pos.CENTER);
+        contenedorSuperior.setStyle("-fx-background-color: white;");
 
-        // Diseño Laodo Izquierdo
-        seccionIzquierda.setSpacing(3);
+        bloqueSuperior.getChildren().add(contenedorSuperior);
 
-        // ---------------------------------------------------------------------------------------------------------------------------
-        // Bloque inferior Izquierdo
+
+// --- BLOQUE INFERIOR IZQUIERDO ---
+        Label labelInferior = new Label("Selecciona una de estas dos opciones:");
+        labelInferior.setStyle("-fx-font-weight: bold;");
 
         ToggleGroup grupo2 = new ToggleGroup();
         ToggleButton algo1 = new ToggleButton("Kmeans");
         ToggleButton algo2 = new ToggleButton("KNN");
 
-        algo1.setOnAction(e -> System.out.println("Selecciona Kmeans"));
-        algo2.setOnAction(e -> System.out.println("Selecciona KNN"));
+        algo1.setStyle(estiloBoton);
+        algo2.setStyle(estiloBoton);
 
         algo1.setToggleGroup(grupo2);
         algo2.setToggleGroup(grupo2);
 
-        VBox algoritmo = new VBox(10, algo1, algo2);
-        algoritmo.setAlignment(Pos.CENTER);
-        algoritmo.setStyle("-fx-background-color: white;");
+        // HBox para los botones inferiores
+        HBox botonesInf = new HBox(15, algo1, algo2);
+        botonesInf.setAlignment(Pos.CENTER);
 
-        bloqueInferior.getChildren().add(algoritmo);
+        // VBox contenedor para el bloque inferior
+        VBox contenedorInferior = new VBox(15, labelInferior, botonesInf);
+        contenedorInferior.setAlignment(Pos.CENTER);
+        contenedorInferior.setStyle("-fx-background-color: white;");
+
+        bloqueInferior.getChildren().add(contenedorInferior);
 
         // -------------------------------------------------------------------------------------------------------------------------
         // Lado Derecho
-        StackPane seccionDerecha = new StackPane();
+        // Espaciado de 10 entre elementos
+        VBox seccionDerecha = new VBox(10);
         HBox.setHgrow(seccionDerecha, Priority.ALWAYS);
-        seccionDerecha.setStyle("-fx-border-color: black; -fx-border-width: 2;");
+        seccionDerecha.setPadding(new Insets(10));
+        seccionDerecha.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;");
+
+        Label tituloDerecha = new Label("Songs Title");
+        tituloDerecha.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+
+        ScrollPane scrollPane = new ScrollPane();
+        VBox.setVgrow(scrollPane, Priority.ALWAYS); // Hace que el scroll ocupe el espacio sobrante
+
+        VBox contenidoScroll = new VBox(5);
+        contenidoScroll.setPadding(new Insets(5));
+
+
+        // Ejemplo: Añadir mucho texto para que se active el scroll
+        for (int i = 1; i <= 30; i++) {
+            contenidoScroll.getChildren().add(new Label("Canción de ejemplo " + i));
+        }
+
+        // Para que el contenido se ajuste al ancho del panel
+        scrollPane.setContent(contenidoScroll);
+        scrollPane.setFitToWidth(true);
+
+        Button btnSugerir = new Button("Sugerir");
+        btnSugerir.setStyle("-fx-background-radius: 20; -fx-padding: 8 20;");
+        btnSugerir.setOnAction(e -> {
+            abrirVentanaSugerir  nuevaVentana = new abrirVentanaSugerir();
+            nuevaVentana.show();
+        });
+
+        // Para poner el botón a la derecha, usamos un HBox como contenedor
+        HBox contenedorBoton = new HBox(btnSugerir);
+        contenedorBoton.setAlignment(Pos.CENTER_RIGHT);
+
+        // Añadimos todo a la sección derecha
+        seccionDerecha.getChildren().addAll(tituloDerecha, scrollPane, contenedorBoton);
 
 
         // --------------------------------------------------------------------------------------------------------------------------
