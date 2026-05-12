@@ -1,4 +1,5 @@
-package es.uji.al447993.clasificarGavaraRamos.modelo.lecturaFicheros;
+package es.uji.al447993.clasificarGavaraRamos.modelo;
+
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -7,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SongReader {
-
     public List<String> loadSongs() {
 
         List<String> songs = new ArrayList<>();

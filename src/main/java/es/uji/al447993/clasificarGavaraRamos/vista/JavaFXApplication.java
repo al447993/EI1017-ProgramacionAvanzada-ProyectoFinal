@@ -34,7 +34,7 @@ public class JavaFXApplication extends Application {
         // Sintaxis para degradar colores
         layout.setStyle("-fx-background-color: linear-gradient(to bottom right, #ffffff, #e6f2ff);");
 
-        Label mensaje = new Label("¡Bienvenido a nuestro Proyecto!");
+        Label mensaje = new Label("¡Bienvenido a nuestro proyecto: Recomendador de canciones!");
         mensaje.setStyle(
                 "-fx-font-size: 32px; " +
                         "-fx-font-weight: bold; " +
@@ -50,7 +50,7 @@ public class JavaFXApplication extends Application {
                         "-fx-font-style: italic;"
         );
 
-        // Cursor.HAND para que cuando estemos en el boton se ponga la manito.
+        // Cursor.HAND para que cuando estemos en el boton se ponga la manita.
         Button btnSiguiente = new Button("Continuar");
         btnSiguiente.setCursor(Cursor.HAND);
         String estiloNormal =
@@ -79,7 +79,7 @@ public class JavaFXApplication extends Application {
 
         layout.getChildren().addAll(mensaje, nombres, btnSiguiente);
 
-        Scene scene = new Scene(layout, 700, 500);
+        Scene scene = new Scene(layout, 1100, 700);
         primaryStage.setTitle("Programación Avanzada");
         primaryStage.setScene(scene);
         primaryStage.show();
