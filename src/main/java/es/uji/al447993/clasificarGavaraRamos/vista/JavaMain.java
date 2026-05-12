@@ -34,7 +34,7 @@ public class JavaMain extends Stage {
         //----------------------------------------------------------------------------------------------------------------------------
         // Bloque superior Izquierdo
 
-        Label labelSuperior = new Label("Selecciona una de estas dos opciones:");
+        Label labelSuperior = new Label("Selecciona un método para calcular la distancia:");
         labelSuperior.setStyle("-fx-font-weight: bold;");
 
         ToggleGroup grupo = new ToggleGroup();
@@ -62,7 +62,7 @@ public class JavaMain extends Stage {
 
 
 // --- BLOQUE INFERIOR IZQUIERDO ---
-        Label labelInferior = new Label("Selecciona una de estas dos opciones:");
+        Label labelInferior = new Label("Selecciona una forma de recomendar:");
         labelInferior.setStyle("-fx-font-weight: bold;");
 
         ToggleGroup grupo2 = new ToggleGroup();
@@ -132,6 +132,6 @@ public class JavaMain extends Stage {
 
         Scene scene = new Scene(principal, 700, 500);
         this.setScene(scene);
-        this.setTitle("Pogramacion Avanzada");
+        this.setTitle("Programación Avanzada");
     }
 }

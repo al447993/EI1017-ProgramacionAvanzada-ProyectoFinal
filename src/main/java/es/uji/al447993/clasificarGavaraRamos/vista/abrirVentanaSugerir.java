@@ -47,11 +47,17 @@ public class abrirVentanaSugerir extends Stage {
 
 
         // Mismo bucle que el anterior para ver que funciona eñ scroll
-        for (int i = 1; i <= 20; i++) {
-            contenidoScroll.getChildren().add(new Label("Detalle de recomendación #" + i));
-        }
+        selectorNumerico.valueProperty().addListener((obs, oldValue, newValue) -> {
+            contenidoScroll.getChildren().clear();
+            for (int i = 1; i <= newValue; i++) {
+                Label recomendacion = new Label("Detalle de recomendación #" + i);
+                contenidoScroll.getChildren().add(recomendacion);
+            }
+        });
         scrollPane.setContent(contenidoScroll);
         scrollPane.setFitToWidth(true);
+
+        contenidoScroll.getChildren().add(new Label("Detalle de recomendación #1"));
 
         //-----------------------------------------------------------------------------------------------------------------------------------------
 
