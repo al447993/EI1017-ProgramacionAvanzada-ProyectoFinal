@@ -1,5 +1,6 @@
 package es.uji.al447993.clasificarGavaraRamos.vista;
 
+import es.uji.al447993.clasificarGavaraRamos.modelo.lecturaFicheros.SongReader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -97,21 +98,13 @@ public class JavaMain extends Stage {
         tituloDerecha.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
 
-        ScrollPane scrollPane = new ScrollPane();
-        VBox.setVgrow(scrollPane, Priority.ALWAYS); // Hace que el scroll ocupe el espacio sobrante
+        ListView<String> listaCanciones = new ListView<>();
+        VBox.setVgrow(listaCanciones, Priority.ALWAYS);
 
-        VBox contenidoScroll = new VBox(5);
-        contenidoScroll.setPadding(new Insets(5));
+        SongReader reader = new SongReader();
 
+        listaCanciones.getItems().addAll(reader.loadSongs());
 
-        // Ejemplo: Añadir mucho texto para que se active el scroll
-        for (int i = 1; i <= 30; i++) {
-            contenidoScroll.getChildren().add(new Label("Canción de ejemplo " + i));
-        }
-
-        // Para que el contenido se ajuste al ancho del panel
-        scrollPane.setContent(contenidoScroll);
-        scrollPane.setFitToWidth(true);
 
         Button btnSugerir = new Button("Sugerir");
         btnSugerir.setStyle("-fx-background-radius: 20; -fx-padding: 8 20;");
@@ -125,7 +118,7 @@ public class JavaMain extends Stage {
         contenedorBoton.setAlignment(Pos.CENTER_RIGHT);
 
         // Añadimos todo a la sección derecha
-        seccionDerecha.getChildren().addAll(tituloDerecha, scrollPane, contenedorBoton);
+        seccionDerecha.getChildren().addAll(tituloDerecha, listaCanciones, contenedorBoton);
 
 
         // --------------------------------------------------------------------------------------------------------------------------
