@@ -46,19 +46,12 @@ public class abrirVentanaSugerir extends Stage {
         contenidoScroll.setPadding(new Insets(10));
 
 
-        // Bucle que escucha para que cuando se aumente el número de recomendaciones, se muestren el número de
-        // recomendaciones seleccionadas
-        selectorNumerico.valueProperty().addListener((obs,oldValue,newValue) -> {
-            contenidoScroll.getChildren().clear(); //Borra todas las anteriores
-            for (int i = 1; i <= newValue; i++) {
-                contenidoScroll.getChildren().add(new Label("Detalle de recomendación #" + i));
-            }
-        });
-
+        // Mismo bucle que el anterior para ver que funciona eñ scroll
+        for (int i = 1; i <= 20; i++) {
+            contenidoScroll.getChildren().add(new Label("Detalle de recomendación #" + i));
+        }
         scrollPane.setContent(contenidoScroll);
         scrollPane.setFitToWidth(true);
-
-        contenidoScroll.getChildren().add(new Label("Detalle de recomendación #1"));
 
         //-----------------------------------------------------------------------------------------------------------------------------------------
 

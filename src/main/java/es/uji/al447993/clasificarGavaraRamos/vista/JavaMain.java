@@ -1,6 +1,6 @@
 package es.uji.al447993.clasificarGavaraRamos.vista;
 
-import es.uji.al447993.clasificarGavaraRamos.modelo.SongReader;
+import es.uji.al447993.clasificarGavaraRamos.modelo.lecturaFicheros.SongReader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,7 +34,7 @@ public class JavaMain extends Stage {
         //----------------------------------------------------------------------------------------------------------------------------
         // Bloque superior Izquierdo
 
-        Label labelSuperior = new Label("Selecciona el método para calcular la distancia:");
+        Label labelSuperior = new Label("Selecciona una de estas dos opciones:");
         labelSuperior.setStyle("-fx-font-weight: bold;");
 
         ToggleGroup grupo = new ToggleGroup();
@@ -62,7 +62,7 @@ public class JavaMain extends Stage {
 
 
 // --- BLOQUE INFERIOR IZQUIERDO ---
-        Label labelInferior = new Label("Selecciona el método para recomendar las canciones:");
+        Label labelInferior = new Label("Selecciona una de estas dos opciones:");
         labelInferior.setStyle("-fx-font-weight: bold;");
 
         ToggleGroup grupo2 = new ToggleGroup();
@@ -132,6 +132,6 @@ public class JavaMain extends Stage {
 
         Scene scene = new Scene(principal, 700, 500);
         this.setScene(scene);
-        this.setTitle("Programación Avanzada");
+        this.setTitle("Pogramacion Avanzada");
     }
 }
