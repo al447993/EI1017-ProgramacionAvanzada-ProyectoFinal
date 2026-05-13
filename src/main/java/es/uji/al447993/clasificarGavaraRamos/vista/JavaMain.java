@@ -1,5 +1,8 @@
 package es.uji.al447993.clasificarGavaraRamos.vista;
 
+import es.uji.al447993.clasificarGavaraRamos.modelo.algorithms.KMeans;
+import es.uji.al447993.clasificarGavaraRamos.modelo.algorithms.KNN;
+import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +18,8 @@ public class JavaMain extends Stage {
     private ToggleGroup grupoDistancia;
     private ToggleGroup grupoAlgoritmo;
     private Button btnSugerir = new Button("Sugerir");
+    private KMeans seleccancion;
+    private KNN selecgenero;
 
     public JavaMain() {
 
@@ -73,8 +78,11 @@ public class JavaMain extends Stage {
         labelInferior.setStyle("-fx-font-weight: bold;");
 
         ToggleGroup grupo2 = new ToggleGroup();
-        ToggleButton algo1 = new ToggleButton("Kmeans");
-        ToggleButton algo2 = new ToggleButton("KNN");
+        ToggleButton algo1 = new ToggleButton("Recomendar por Canción"); // cancion - Kmeans
+        ToggleButton algo2 = new ToggleButton("Recomendar por Genero Musical");  // Genero -  KNN
+
+        algo1.setId("algo1");
+        algo2.setId("algo2");
 
         algo1.setStyle(estiloBoton);
         algo2.setStyle(estiloBoton);
@@ -141,22 +149,31 @@ public class JavaMain extends Stage {
 
     public String getDistancia() {
         ToggleButton dist = (ToggleButton) grupoDistancia.getSelectedToggle();
-        if (dist != null)
-            return dist.getText();
+        if (dist != null) return dist.getText();
         return "";
     }
 
     public String getAlgoritmo() {
         ToggleButton algorithm = (ToggleButton) grupoAlgoritmo.getSelectedToggle();
-        if (algorithm != null)
-            return algorithm.getText();
-        return "";
+        if (algorithm.getId() == "algo1") return "Kmeans";
+        return "knn";
     }
 
     public Button getBtnSugerir() {
+        initialize();
         return btnSugerir;
     }
+
     public String getCancion() {
         return listaCanciones.getSelectionModel().getSelectedItem();
     }
+
+    public void initialize() {
+        BooleanBinding isDistanceSelected = grupoDistancia.selectedToggleProperty().isNotNull();
+        BooleanBinding isRecommendSelected = grupoAlgoritmo.selectedToggleProperty().isNotNull();
+        BooleanBinding isSongSelected = listaCanciones.getSelectionModel().selectedItemProperty().isNotNull();
+
+        btnSugerir.disableProperty().bind(isDistanceSelected.not().or(isRecommendSelected.not()).or(isSongSelected.not()));
+    }
+
 }

@@ -24,15 +24,6 @@ public class implementacionControlador {
             String distancia = vista.getDistancia();
             String algoritmo = vista.getAlgoritmo();
 
-            if (cancion == null || distancia == null || algoritmo == null) {
-                Alert alerta = new Alert(Alert.AlertType.WARNING);
-                alerta.setTitle("Atención");
-                alerta.setHeaderText("Faltan datos");
-                alerta.setContentText("Selecciona todos los datos correspondientes");
-                alerta.showAndWait();
-                return;
-            }
-
             abrirVentanaSugerir ventana = new abrirVentanaSugerir();
 
             List<String> recomendaciones = modelo.recommend(cancion, distancia, algoritmo, 1);
