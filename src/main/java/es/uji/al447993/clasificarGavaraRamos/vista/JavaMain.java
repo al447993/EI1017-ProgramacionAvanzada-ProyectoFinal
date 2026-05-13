@@ -8,7 +8,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class JavaMain extends Stage {
+
+    private ListView<String> listaCanciones = new ListView<>();
+    private ToggleGroup grupoDistancia;
+    private ToggleGroup grupoAlgoritmo;
+    private Button btnSugerir = new Button("Sugerir");
+
     public JavaMain() {
 
         HBox principal = new HBox();
@@ -86,6 +94,10 @@ public class JavaMain extends Stage {
 
         bloqueInferior.getChildren().add(contenedorInferior);
 
+        //Guardamos los valores para hacer un método que pasará los valores al controlador
+        this.grupoDistancia = grupo;
+        this.grupoAlgoritmo = grupo2;
+
         // -------------------------------------------------------------------------------------------------------------------------
         // Lado Derecho
         // Espaciado de 10 entre elementos
@@ -97,16 +109,8 @@ public class JavaMain extends Stage {
         Label tituloDerecha = new Label("Songs Title");
         tituloDerecha.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-
-        ListView<String> listaCanciones = new ListView<>();
         VBox.setVgrow(listaCanciones, Priority.ALWAYS);
 
-        SongReader reader = new SongReader();
-
-        listaCanciones.getItems().addAll(reader.loadSongs());
-
-
-        Button btnSugerir = new Button("Sugerir");
         btnSugerir.setStyle("-fx-background-radius: 20; -fx-padding: 8 20;");
         btnSugerir.setOnAction(e -> {
             abrirVentanaSugerir  nuevaVentana = new abrirVentanaSugerir();
@@ -133,5 +137,30 @@ public class JavaMain extends Stage {
         Scene scene = new Scene(principal, 700, 500);
         this.setScene(scene);
         this.setTitle("Programación Avanzada");
+    }
+
+    public void actualizarLista(List<String> canciones) {
+        listaCanciones.getItems().setAll(canciones);
+    }
+
+    public String getDistancia() {
+        ToggleButton dist = (ToggleButton) grupoDistancia.getSelectedToggle();
+        if (dist != null)
+            return dist.getText();
+        return "";
+    }
+
+    public String getAlgoritmo() {
+        ToggleButton algorithm = (ToggleButton) grupoAlgoritmo.getSelectedToggle();
+        if (algorithm != null)
+            return algorithm.getText();
+        return "";
+    }
+
+    public Button getBtnSugerir() {
+        return btnSugerir;
+    }
+    public String getCancion() {
+        return listaCanciones.getSelectionModel().getSelectedItem();
     }
 }

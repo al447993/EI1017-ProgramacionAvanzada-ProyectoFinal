@@ -1,8 +1,7 @@
 package es.uji.al447993.clasificarGavaraRamos.vista;
 
-import es.uji.al447993.clasificarGavaraRamos.controlador.Controlador;
-import es.uji.al447993.clasificarGavaraRamos.controlador.implementacionControlador;
 import es.uji.al447993.clasificarGavaraRamos.modelo.Modelo;
+import es.uji.al447993.clasificarGavaraRamos.controlador.implementacionControlador;
 import es.uji.al447993.clasificarGavaraRamos.modelo.implementacionModelo;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -19,12 +18,6 @@ public class JavaFXApplication extends Application {
     }
 
     public void start(Stage primaryStage) {
-        Modelo modelo = new implementacionModelo();
-        Vista view = new implementacionVista();
-        Controlador controlador = new implementacionControlador();
-
-        modelo.setView(view);
-        view.setModel(modelo);
 
         // 1. Contenedor Principal
         VBox layout = new VBox(25);
@@ -73,6 +66,8 @@ public class JavaFXApplication extends Application {
         // Funcionamiento del Boton.
         btnSiguiente.setOnAction(e -> {
             JavaMain mainWindow = new JavaMain();
+            Modelo modelo = new implementacionModelo();
+            new implementacionControlador(modelo, mainWindow);
             mainWindow.show();
             primaryStage.close();
         });

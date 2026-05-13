@@ -15,13 +15,8 @@ import java.util.*;
 
 class SongRecSys {
     private RecSys recsys;
-    private Distance distancia;
 
-    public SongRecSys(Distance distancia) {
-        this.distancia = distancia;
-    }
-
-    SongRecSys(String method) throws Exception {
+    public SongRecSys(String method, Distance distancia) throws Exception {
         String sep = System.getProperty("file.separator");
         String ruta = "recsys";
 
@@ -55,12 +50,6 @@ class SongRecSys {
         this.recsys.train(tables.get(method+"train"));
         this.recsys.initialise(tables.get(method+"test"), names);
 
-        // Given a liked item, ask for a number of recomendations
-        String liked_name = "Lootkemia";
-        List<String> recommended_items = this.recsys.recommend(liked_name,5);
-
-        // Display the recommendation text (to be replaced with graphical display with JavaFX implementation)
-        reportRecommendation(liked_name,recommended_items);
     }
 
     private List<String> readNames(String fileOfItemNames) throws IOException, URISyntaxException {
@@ -75,16 +64,7 @@ class SongRecSys {
         return names;
     }
 
-    private void reportRecommendation(String liked_name, List<String> recommended_items) {
-        System.out.println("If you liked \""+liked_name+"\" then you might like:");
-        for (String name : recommended_items)
-        {
-            System.out.println("\t * "+name);
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-        new SongRecSys("knn");
-        new SongRecSys("kmeans");
+    public List<String> getRecomendaciones(String cancion, int num) {
+        return this.recsys.recommend(cancion,num);
     }
 }

@@ -1,8 +1,10 @@
 package es.uji.al447993.clasificarGavaraRamos.modelo;
 
-import es.uji.al447993.clasificarGavaraRamos.vista.Vista;
+import java.util.List;
 
 public interface Modelo {
 
-    void setView(Vista view);
+    //Lectura CSV
+    List<String> obtenerCanciones();
+    List<String> recommend(String cancion, String dist, String alg, int num);
 }

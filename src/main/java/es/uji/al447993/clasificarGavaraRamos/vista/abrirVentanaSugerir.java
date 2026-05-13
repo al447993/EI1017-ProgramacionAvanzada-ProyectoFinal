@@ -10,7 +10,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class abrirVentanaSugerir extends Stage {
+
+    private Spinner<Integer> selectorNumerico;
+    private VBox contenidoScroll;
+
     public abrirVentanaSugerir() {
 
         // Bloquea la ventana principal
@@ -24,7 +30,7 @@ public class abrirVentanaSugerir extends Stage {
         Label lblNum = new Label("Número de recomendaciones:");
         lblNum.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
 
-        Spinner<Integer> selectorNumerico = new Spinner<>();
+        this.selectorNumerico = new Spinner<>();
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
         selectorNumerico.setValueFactory(valueFactory);
         // Permite escribir manualmente
@@ -42,18 +48,8 @@ public class abrirVentanaSugerir extends Stage {
         ScrollPane scrollPane = new ScrollPane();
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        VBox contenidoScroll = new VBox(10);
+        this.contenidoScroll = new VBox(10);
         contenidoScroll.setPadding(new Insets(10));
-
-
-        // Mismo bucle que el anterior para ver que funciona eñ scroll
-        selectorNumerico.valueProperty().addListener((obs, oldValue, newValue) -> {
-            contenidoScroll.getChildren().clear();
-            for (int i = 1; i <= newValue; i++) {
-                Label recomendacion = new Label("Detalle de recomendación #" + i);
-                contenidoScroll.getChildren().add(recomendacion);
-            }
-        });
         scrollPane.setContent(contenidoScroll);
         scrollPane.setFitToWidth(true);
 
@@ -78,6 +74,19 @@ public class abrirVentanaSugerir extends Stage {
         Scene scene = new Scene(layoutPrincipal, 700, 500);
         this.setScene(scene);
         this.setTitle("Programacion Avanzada");
+    }
+
+    public Spinner<Integer> getSelectorNumerico() {
+        return selectorNumerico;
+    }
+
+    public void actualizarLista(List<String> canciones) {
+        contenidoScroll.getChildren().clear();
+        for(String cancion: canciones) {
+            Label label = new Label(cancion);
+            label.setStyle("-fx-font-size: 13px; -fx-padding: 5; -fx-border-color: #ddd; -fx-border-width: 0 0 1 0;");
+            contenidoScroll.getChildren().add(label);
+        }
     }
 }
 
