@@ -65,7 +65,7 @@ public class JavaFXApplication extends Application {
 
         // Funcionamiento del Boton.
         btnSiguiente.setOnAction(e -> {
-            JavaMain mainWindow = new JavaMain();
+            Vista mainWindow = new implementacionVista();
             Modelo modelo = new implementacionModelo();
             new implementacionControlador(modelo, mainWindow);
             mainWindow.show();

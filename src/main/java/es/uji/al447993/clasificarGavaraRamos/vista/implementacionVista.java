@@ -1,7 +1,5 @@
 package es.uji.al447993.clasificarGavaraRamos.vista;
 
-import es.uji.al447993.clasificarGavaraRamos.modelo.algorithms.KMeans;
-import es.uji.al447993.clasificarGavaraRamos.modelo.algorithms.KNN;
 import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,16 +10,14 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class JavaMain extends Stage {
+public class implementacionVista extends Stage implements Vista {
 
     private ListView<String> listaCanciones = new ListView<>();
     private ToggleGroup grupoDistancia;
     private ToggleGroup grupoAlgoritmo;
     private Button btnSugerir = new Button("Sugerir");
-    private KMeans seleccancion;
-    private KNN selecgenero;
 
-    public JavaMain() {
+    public implementacionVista() {
 
         HBox principal = new HBox();
         principal.setStyle("-fx-background-color: grey;");
@@ -143,31 +139,37 @@ public class JavaMain extends Stage {
         this.setTitle("Programación Avanzada");
     }
 
+    @Override
     public void actualizarLista(List<String> canciones) {
         listaCanciones.getItems().setAll(canciones);
     }
 
+    @Override
     public String getDistancia() {
         ToggleButton dist = (ToggleButton) grupoDistancia.getSelectedToggle();
         if (dist != null) return dist.getText();
         return "";
     }
 
+    @Override
     public String getAlgoritmo() {
         ToggleButton algorithm = (ToggleButton) grupoAlgoritmo.getSelectedToggle();
         if (algorithm.getId() == "algo1") return "Kmeans";
         return "knn";
     }
 
+    @Override
     public Button getBtnSugerir() {
         initialize();
         return btnSugerir;
     }
 
+    @Override
     public String getCancion() {
         return listaCanciones.getSelectionModel().getSelectedItem();
     }
 
+    @Override
     public void initialize() {
         BooleanBinding isDistanceSelected = grupoDistancia.selectedToggleProperty().isNotNull();
         BooleanBinding isRecommendSelected = grupoAlgoritmo.selectedToggleProperty().isNotNull();

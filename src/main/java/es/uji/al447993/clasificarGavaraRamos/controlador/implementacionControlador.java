@@ -1,17 +1,17 @@
 package es.uji.al447993.clasificarGavaraRamos.controlador;
 
 import es.uji.al447993.clasificarGavaraRamos.modelo.Modelo;
-import es.uji.al447993.clasificarGavaraRamos.vista.JavaMain;
+import es.uji.al447993.clasificarGavaraRamos.vista.Vista;
+import es.uji.al447993.clasificarGavaraRamos.vista.implementacionVista;
 import es.uji.al447993.clasificarGavaraRamos.vista.abrirVentanaSugerir;
-import javafx.scene.control.Alert;
 
 import java.util.List;
 
 public class implementacionControlador {
     private Modelo modelo;
-    private JavaMain vista;
+    private Vista vista;
 
-    public implementacionControlador(Modelo modelo, JavaMain vista) {
+    public implementacionControlador(Modelo modelo, Vista vista) {
         this.modelo = modelo;
         this.vista = vista;
 
@@ -26,7 +26,7 @@ public class implementacionControlador {
 
             abrirVentanaSugerir ventana = new abrirVentanaSugerir();
 
-            List<String> recomendaciones = modelo.recommend(cancion, distancia, algoritmo, 1);
+            List<String> recomendaciones = this.modelo.recommend(cancion, distancia, algoritmo, 1);
             ventana.actualizarLista(recomendaciones);
 
             ventana.getSelectorNumerico().valueProperty().addListener((obs, oldValue, newValue) -> {
