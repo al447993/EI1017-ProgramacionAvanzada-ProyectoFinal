@@ -37,6 +37,7 @@ public class abrirVentanaSugerir extends Stage {
         selectorNumerico.setEditable(true);
         selectorNumerico.setPrefWidth(80);
 
+
         HBox filaNumerica = new HBox(15, lblNum, selectorNumerico);
         filaNumerica.setAlignment(Pos.CENTER_LEFT);
 
@@ -53,7 +54,6 @@ public class abrirVentanaSugerir extends Stage {
         scrollPane.setContent(contenidoScroll);
         scrollPane.setFitToWidth(true);
 
-        contenidoScroll.getChildren().add(new Label("Detalle de recomendación #1"));
 
         //-----------------------------------------------------------------------------------------------------------------------------------------
 

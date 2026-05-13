@@ -1,6 +1,5 @@
 package es.uji.al447993.clasificarGavaraRamos.vista;
 
-import es.uji.al447993.clasificarGavaraRamos.modelo.lecturaFicheros.SongReader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -49,7 +48,7 @@ public class JavaMain extends Stage {
         ToggleButton dist1 = new ToggleButton("EuclideanDistance");
         ToggleButton dist2 = new ToggleButton("ManhattanDistance");
 
-// Estilo circular/redondeado para botones
+        // Estilo circular/redondeado para botones
         String estiloBoton = "-fx-background-radius: 20; -fx-padding: 5 10;";
         dist1.setStyle(estiloBoton);
         dist2.setStyle(estiloBoton);
@@ -57,11 +56,11 @@ public class JavaMain extends Stage {
         dist1.setToggleGroup(grupo);
         dist2.setToggleGroup(grupo);
 
-// HBox para poner los botones uno al lado del otro
+        // HBox para poner los botones uno al lado del otro
         HBox botonesSup = new HBox(15, dist1, dist2);
         botonesSup.setAlignment(Pos.CENTER);
 
-// VBox contenedor que agrupa el Texto + el HBox de botones
+        // VBox contenedor que agrupa el Texto + el HBox de botones
         VBox contenedorSuperior = new VBox(15, labelSuperior, botonesSup);
         contenedorSuperior.setAlignment(Pos.CENTER);
         contenedorSuperior.setStyle("-fx-background-color: white;");
@@ -69,7 +68,7 @@ public class JavaMain extends Stage {
         bloqueSuperior.getChildren().add(contenedorSuperior);
 
 
-// --- BLOQUE INFERIOR IZQUIERDO ---
+        // --- BLOQUE INFERIOR IZQUIERDO ---
         Label labelInferior = new Label("Selecciona una forma de recomendar:");
         labelInferior.setStyle("-fx-font-weight: bold;");
 
@@ -112,10 +111,7 @@ public class JavaMain extends Stage {
         VBox.setVgrow(listaCanciones, Priority.ALWAYS);
 
         btnSugerir.setStyle("-fx-background-radius: 20; -fx-padding: 8 20;");
-        btnSugerir.setOnAction(e -> {
-            abrirVentanaSugerir  nuevaVentana = new abrirVentanaSugerir();
-            nuevaVentana.show();
-        });
+        //La acción del botón la hacemos en implementacionControlador
 
         // Para poner el botón a la derecha, usamos un HBox como contenedor
         HBox contenedorBoton = new HBox(btnSugerir);

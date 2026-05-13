@@ -4,19 +4,33 @@ import es.uji.al447993.clasificarGavaraRamos.modelo.distancia.EuclideanDistance;
 import es.uji.al447993.clasificarGavaraRamos.modelo.distancia.ManhattanDistance;
 import es.uji.al447993.clasificarGavaraRamos.modelo.interfaces.Distance;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class implementacionModelo implements Modelo {
 
-    private SongReader reader = new SongReader();
-
     //Lectura CSV
     @Override
     public List<String> obtenerCanciones() {
-        return reader.loadSongs();
+        // Leemos directamente desde el recurso que usa tu lógica de negocio
+        List<String> songs = new ArrayList<>();
+        try (InputStream is = getClass().getResourceAsStream("/recsys/songs_test_names.csv");
+             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) songs.add(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return songs;
     }
 
+    @Override
     public List<String> recommend(String cancion, String dist, String alg, int num) {
         try {
             Distance distancia;

@@ -1,14 +1,12 @@
 es\uji\al447993\clasificarGavaraRamos\modelo\tables\TableWithLabels.class
 es\uji\al447993\clasificarGavaraRamos\modelo\lecturaFicheros\CSVUnlabeledFileReader.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\KNNTest.class
-es\uji\al447993\clasificarGavaraRamos\modelo\lecturaFicheros\SongReader.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\RecSysTest.class
 es\uji\al447993\clasificarGavaraRamos\vista\JavaMain.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\TestSuite.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\RecSysTest$KMeansRecSys.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\EuclideanDistanceTest.class
 es\uji\al447993\clasificarGavaraRamos\modelo\interfaces\Distance.class
-es\uji\al447993\clasificarGavaraRamos\modelo\SongReader.class
 es\uji\al447993\clasificarGavaraRamos\modelo\Modelo.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\TableWithLabelsTest.class
 es\uji\al447993\clasificarGavaraRamos\modelo\tests\ManhattanDistanceTest.class

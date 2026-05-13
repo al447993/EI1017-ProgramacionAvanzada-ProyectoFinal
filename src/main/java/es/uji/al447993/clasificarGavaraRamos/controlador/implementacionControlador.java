@@ -34,12 +34,20 @@ public class implementacionControlador {
             }
 
             abrirVentanaSugerir ventana = new abrirVentanaSugerir();
-            List<String> recomendaciones = modelo.recommend(cancion,distancia,algoritmo,1);
+
+            List<String> recomendaciones = modelo.recommend(cancion, distancia, algoritmo, 1);
             ventana.actualizarLista(recomendaciones);
 
             ventana.getSelectorNumerico().valueProperty().addListener((obs, oldValue, newValue) -> {
-                List<String> nuevasRecs = modelo.recommend(cancion,distancia,algoritmo,newValue);
-                ventana.actualizarLista(nuevasRecs);
+                // Si el valor es null o no ha cambiado
+                if (newValue == null || newValue.equals(oldValue)) return;
+
+                // Platform.runLater sirve para que cuando pulsemos para aumentar el número de recomendaciones
+                // mostradas por pantalla, este no explote, y vaya de uno en uno (si no, de 1 pasaba a 7)
+                javafx.application.Platform.runLater(() -> {
+                    List<String> nuevasRecs = modelo.recommend(cancion, distancia, algoritmo, newValue);
+                    ventana.actualizarLista(nuevasRecs);
+                });
             });
 
             ventana.show();

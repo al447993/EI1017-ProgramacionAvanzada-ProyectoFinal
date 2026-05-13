@@ -4,6 +4,7 @@ import es.uji.al447993.clasificarGavaraRamos.modelo.tables.Table;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public abstract class FileReader<T extends Table> extends ReaderTemplate {
@@ -17,33 +18,23 @@ public abstract class FileReader<T extends Table> extends ReaderTemplate {
 
     @Override
     void openSource(String source) throws FileNotFoundException {
-        File file = null;
+        InputStream is = getClass().getResourceAsStream(source);
 
-        // 1. Intentar como recurso directo (lo que usabas antes)
-        java.net.URL resource = getClass().getClassLoader().getResource(source);
-        if (resource != null) {
-            file = new File(resource.getPath());
+        // Si no lo encuentra como recurso, intentamos buscarlo como archivo físico en el disco
+        if (is == null) {
+            java.io.File file = new java.io.File(source);
+            if (file.exists()) {
+                is = new java.io.FileInputStream(file);
+            }
         }
 
-        // 2. Si falla, intentar buscarlo dentro de la carpeta de recursos del sistema
-        if (file == null || !file.exists()) {
-            // Intentamos añadir el prefijo de resources si el test manda una ruta relativa
-            String resourcePath = "src/main/resources/" + source;
-            file = new File(resourcePath);
+        // Si después de ambos intentos sigue siendo null, lanzamos la excepción
+        if (is == null) {
+            throw new FileNotFoundException("No se pudo encontrar el recurso o archivo: " + source);
         }
 
-        // 3. Si sigue fallando, intentar la ruta tal cual (ruta absoluta o relativa al proyecto)
-        if (!file.exists()) {
-            file = new File(source);
-        }
-
-        // Verificación final
-        if (!file.exists()) {
-            throw new FileNotFoundException("No se pudo encontrar el archivo en: " + source +
-                    ". Ruta absoluta intentada: " + file.getAbsolutePath());
-        }
-
-        this.sc = new Scanner(file);
+        // El Scanner funciona perfectamente pasándole el InputStream directamente
+        this.sc = new Scanner(is);
     }
 
     abstract void processHeaders(String headers);
