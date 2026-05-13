@@ -17,7 +17,7 @@ public class implementacionModelo implements Modelo {
     public List<String> obtenerCanciones() {
         // Leemos directamente desde el recurso que usa tu lógica de negocio
         List<String> songs = new ArrayList<>();
-        try (InputStream is = getClass().getResourceAsStream("/recsys/songs_test_names.csv");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("recsys/songs_test_names.csv");
              BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
             String line;

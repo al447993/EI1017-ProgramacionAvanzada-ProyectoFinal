@@ -16,7 +16,7 @@ class SongRecSys {
     private RecSys recsys;
 
     public SongRecSys(String method, Distance distancia) throws Exception {
-        String ruta = "/recsys/";
+        String ruta = "recsys/";
 
         // File names (could be provided as arguments to the constructor to be more general)
         Map<String,String> filenames = new HashMap<>();
@@ -51,18 +51,30 @@ class SongRecSys {
 
     private List<String> readNames(String fileOfItemNames) throws IOException, URISyntaxException {
         List<String> names = new ArrayList<>();
-        try (InputStream is = getClass().getResourceAsStream(fileOfItemNames);
-             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
-            if (is == null) throw new FileNotFoundException("No se encontró: " + fileOfItemNames);
+        InputStream is = getClass()
+                .getClassLoader()
+                .getResourceAsStream(fileOfItemNames);
+        // PRIMERO comprobar null
+        if (is == null) {
+            throw new FileNotFoundException(
+                    "No se encontró: " + fileOfItemNames
+            );
+        }
+        // DESPUÉS crear BufferedReader
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(is))) {
 
             String line;
+
             while ((line = br.readLine()) != null) {
+
                 if (!line.trim().isEmpty()) {
                     names.add(line);
                 }
             }
         }
+
         return names;
     }
 

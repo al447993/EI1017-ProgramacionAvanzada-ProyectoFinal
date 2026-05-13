@@ -1,3 +1,12 @@
+import com.sun.javafx.scene.traversal.Algorithm;
+import es.uji.al447993.clasificarGavaraRamos.modelo.rows.Row;
+import es.uji.al447993.clasificarGavaraRamos.modelo.tables.Table;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /*
   Copiar y usar donde corresponda
 */

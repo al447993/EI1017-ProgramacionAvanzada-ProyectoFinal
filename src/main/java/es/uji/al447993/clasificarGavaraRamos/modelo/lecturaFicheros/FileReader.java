@@ -18,7 +18,7 @@ public abstract class FileReader<T extends Table> extends ReaderTemplate {
 
     @Override
     void openSource(String source) throws FileNotFoundException {
-        InputStream is = getClass().getResourceAsStream(source);
+        InputStream is = getClass().getClassLoader().getResourceAsStream(source);
 
         // Si no lo encuentra como recurso, intentamos buscarlo como archivo físico en el disco
         if (is == null) {

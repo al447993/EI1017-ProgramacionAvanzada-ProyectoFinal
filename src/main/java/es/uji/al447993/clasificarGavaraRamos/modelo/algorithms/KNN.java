@@ -1,6 +1,5 @@
 package es.uji.al447993.clasificarGavaraRamos.modelo.algorithms;
 
-import es.uji.al447993.clasificarGavaraRamos.modelo.distancia.ManhattanDistance;
 import es.uji.al447993.clasificarGavaraRamos.modelo.interfaces.Algorithms;
 import es.uji.al447993.clasificarGavaraRamos.modelo.interfaces.Distance;
 import es.uji.al447993.clasificarGavaraRamos.modelo.rows.RowWithLabel;
