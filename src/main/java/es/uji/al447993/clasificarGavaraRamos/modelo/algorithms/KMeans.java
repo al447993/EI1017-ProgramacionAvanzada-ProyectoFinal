@@ -45,7 +45,6 @@ public class KMeans implements Algorithms<Table, List<Double>, Integer> {
             centroides.add(new ArrayList<>(datos.getRowAt(index).getData()));
         }
 
-
         // Iteraciones KMeans
         for (int i = 0; i < numIterations; i++) {
 
@@ -56,7 +55,6 @@ public class KMeans implements Algorithms<Table, List<Double>, Integer> {
             for (int k = 0; k < numClusters; k++) {
                 grupos.put(k, new ArrayList<>());
             }
-
 
             // Asignar puntos al centroide más cercano
             for (int j = 0; j < datos.getRowCount(); j++) {

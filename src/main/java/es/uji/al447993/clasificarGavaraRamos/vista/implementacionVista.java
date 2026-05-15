@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -20,65 +21,103 @@ public class implementacionVista extends Stage implements Vista {
     public implementacionVista() {
 
         HBox principal = new HBox();
-        principal.setStyle("-fx-background-color: grey;");
+        principal.setSpacing(15);
+        principal.setPadding(new Insets(15));
+        principal.setStyle("""
+                -fx-background-color: linear-gradient(to bottom right, #1e1e2f, #2d2d44);
+                """);
 
-        // Lado Izquierdo   (ALWAYS ocupa el 50% de la pantalla)
-        VBox seccionIzquierda = new VBox();
+
+        // =============================================================================================================
+        // Zona Izquierda
+        VBox seccionIzquierda = new VBox(15);
         HBox.setHgrow(seccionIzquierda, Priority.ALWAYS);
 
-        // Creacion de Bloque superior Izquierdo
-        StackPane bloqueSuperior = new StackPane();
+        // ---------- BLOQUE SUPERIOR ----------
+        VBox bloqueSuperior = new VBox(20);
         VBox.setVgrow(bloqueSuperior, Priority.ALWAYS);
-        bloqueSuperior.setStyle("-fx-border-color: black; -fx-border-width: 2;");
 
-        // Creacion de Bloque inferior Izquierdo
-        StackPane bloqueInferior = new StackPane();
-        VBox.setVgrow(bloqueInferior, Priority.ALWAYS);
-        bloqueInferior.setStyle("-fx-border-color: black; -fx-border-width: 2;");
+        bloqueSuperior.setAlignment(Pos.CENTER);
+        bloqueSuperior.setPadding(new Insets(25));
 
-        // Agregamos al lado Izquierdo
-        seccionIzquierda.getChildren().addAll(bloqueSuperior, bloqueInferior);
+        bloqueSuperior.setStyle("""
+                -fx-background-color: white;
+                -fx-background-radius: 20;
+                -fx-border-radius: 20;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 4);
+                """);
 
-        //----------------------------------------------------------------------------------------------------------------------------
-        // Bloque superior Izquierdo
-
-        Label labelSuperior = new Label("Selecciona un método para calcular la distancia:");
-        labelSuperior.setStyle("-fx-font-weight: bold;");
+        Label labelSuperior = new Label("Método de Distancia");
+        labelSuperior.setStyle("""
+                -fx-font-size: 18px;
+                -fx-font-weight: bold;
+                -fx-text-fill: #333;
+                """);
 
         ToggleGroup grupo = new ToggleGroup();
-        ToggleButton dist1 = new ToggleButton("EuclideanDistance");
-        ToggleButton dist2 = new ToggleButton("ManhattanDistance");
+        ToggleButton dist1 = new ToggleButton("Euclidean");
+        ToggleButton dist2 = new ToggleButton("Manhattan");
 
-        // Estilo circular/redondeado para botones
-        String estiloBoton = "-fx-background-radius: 20; -fx-padding: 5 10;";
+        String estiloBoton = """
+                -fx-background-color: #e4e4e4;
+                -fx-background-radius: 30;
+                -fx-font-size: 14px;
+                -fx-padding: 10 20;
+                -fx-cursor: hand;
+                """;
+
+        String estiloSeleccionado = """
+                -fx-background-color: #6c63ff;
+                -fx-text-fill: white;
+                -fx-background-radius: 30;
+                -fx-font-size: 14px;
+                -fx-padding: 10 20;
+                """;
+
         dist1.setStyle(estiloBoton);
         dist2.setStyle(estiloBoton);
 
         dist1.setToggleGroup(grupo);
         dist2.setToggleGroup(grupo);
 
-        // HBox para poner los botones uno al lado del otro
+        dist1.selectedProperty().addListener((obs, oldV, selected) -> {
+            dist1.setStyle(selected ? estiloSeleccionado : estiloBoton);
+        });
+
+        dist2.selectedProperty().addListener((obs, oldV, selected) -> {
+            dist2.setStyle(selected ? estiloSeleccionado : estiloBoton);
+        });
+
         HBox botonesSup = new HBox(15, dist1, dist2);
         botonesSup.setAlignment(Pos.CENTER);
 
-        // VBox contenedor que agrupa el Texto + el HBox de botones
-        VBox contenedorSuperior = new VBox(15, labelSuperior, botonesSup);
-        contenedorSuperior.setAlignment(Pos.CENTER);
-        contenedorSuperior.setStyle("-fx-background-color: white;");
+        bloqueSuperior.getChildren().addAll(labelSuperior, botonesSup);
 
-        bloqueSuperior.getChildren().add(contenedorSuperior);
+        // ---------- BLOQUE INFERIOR ----------
+        VBox bloqueInferior = new VBox(20);
+        VBox.setVgrow(bloqueInferior, Priority.ALWAYS);
 
+        bloqueInferior.setAlignment(Pos.CENTER);
+        bloqueInferior.setPadding(new Insets(25));
 
-        // --- BLOQUE INFERIOR IZQUIERDO ---
-        Label labelInferior = new Label("Selecciona una forma de recomendar:");
-        labelInferior.setStyle("-fx-font-weight: bold;");
+        bloqueInferior.setStyle("""
+                -fx-background-color: white;
+                -fx-background-radius: 20;
+                -fx-border-radius: 20;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 4);
+                """);
+
+        Label labelInferior = new Label("Forma de Recomendación");
+        labelInferior.setStyle("""
+                -fx-font-size: 18px;
+                -fx-font-weight: bold;
+                -fx-text-fill: #333;
+                """);
 
         ToggleGroup grupo2 = new ToggleGroup();
-        ToggleButton algo1 = new ToggleButton("Recomendar por Canción"); // cancion - Kmeans
-        ToggleButton algo2 = new ToggleButton("Recomendar por Genero Musical");  // Genero -  KNN
 
-        algo1.setId("algo1");
-        algo2.setId("algo2");
+        ToggleButton algo1 = new ToggleButton("Por Canción");
+        ToggleButton algo2 = new ToggleButton("Por Género");
 
         algo1.setStyle(estiloBoton);
         algo2.setStyle(estiloBoton);
@@ -86,57 +125,102 @@ public class implementacionVista extends Stage implements Vista {
         algo1.setToggleGroup(grupo2);
         algo2.setToggleGroup(grupo2);
 
-        // HBox para los botones inferiores
+
+        // Lo que hace es cuando seleccionamos algo? va a llamar a su propiedad (Toggle) y ejecutar el addListener
+        // funcion lambda siempre 3 parametros se ignoran los dos primeros.
+        // Lo importante es el selected, que si es verdadero pondra estiloSeleccionado si no estiloBoton.
+
+        algo1.selectedProperty().addListener((obs, oldV, selected) -> {
+            algo1.setStyle(selected ? estiloSeleccionado : estiloBoton);
+        });
+
+        algo2.selectedProperty().addListener((obs, oldV, selected) -> {
+            algo2.setStyle(selected ? estiloSeleccionado : estiloBoton);
+        });
+
         HBox botonesInf = new HBox(15, algo1, algo2);
         botonesInf.setAlignment(Pos.CENTER);
 
-        // VBox contenedor para el bloque inferior
-        VBox contenedorInferior = new VBox(15, labelInferior, botonesInf);
-        contenedorInferior.setAlignment(Pos.CENTER);
-        contenedorInferior.setStyle("-fx-background-color: white;");
+        bloqueInferior.getChildren().addAll(labelInferior, botonesInf);
 
-        bloqueInferior.getChildren().add(contenedorInferior);
+        seccionIzquierda.getChildren().addAll(bloqueSuperior, bloqueInferior);
 
-        //Guardamos los valores para hacer un método que pasará los valores al controlador
-        this.grupoDistancia = grupo;
-        this.grupoAlgoritmo = grupo2;
-
-        // -------------------------------------------------------------------------------------------------------------------------
-        // Lado Derecho
-        // Espaciado de 10 entre elementos
-        VBox seccionDerecha = new VBox(10);
+        // =============================================================================================================
+        // Zona Derecha
+        VBox seccionDerecha = new VBox(15);
         HBox.setHgrow(seccionDerecha, Priority.ALWAYS);
-        seccionDerecha.setPadding(new Insets(10));
-        seccionDerecha.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: white;");
 
-        Label tituloDerecha = new Label("Songs Title");
-        tituloDerecha.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        seccionDerecha.setPadding(new Insets(20));
+        seccionDerecha.setStyle("""
+                -fx-background-color: white;
+                -fx-background-radius: 20;
+                -fx-border-radius: 20;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 4);
+                """);
+        Label tituloDerecha = new Label("🎵 Songs");
+        tituloDerecha.setStyle("""
+                -fx-font-size: 22px;
+                -fx-font-weight: bold;
+                -fx-text-fill: #333;
+                """);
+        listaCanciones.setStyle("""
+                -fx-background-radius: 15;
+                -fx-border-radius: 15;
+                -fx-font-size: 14px;
+                """);
 
         VBox.setVgrow(listaCanciones, Priority.ALWAYS);
 
-        btnSugerir.setStyle("-fx-background-radius: 20; -fx-padding: 8 20;");
-        //La acción del botón la hacemos en implementacionControlador
+        btnSugerir.setText("Sugerir");
+        btnSugerir.setStyle("""
+                -fx-background-color: #6c63ff;
+                -fx-text-fill: white;
+                -fx-font-size: 15px;
+                -fx-font-weight: bold;
+                -fx-background-radius: 30;
+                -fx-padding: 12 25;
+                -fx-cursor: hand;
+                """);
 
-        // Para poner el botón a la derecha, usamos un HBox como contenedor
-        HBox contenedorBoton = new HBox(btnSugerir);
+        Button btnCerrar = new Button("Cerrar");
+        btnCerrar.setStyle("""
+                -fx-background-color: #ff4d4d;
+                -fx-text-fill: white;
+                -fx-font-size: 15px;
+                -fx-font-weight: bold;
+                -fx-background-radius: 30;
+                -fx-padding: 12 25;
+                -fx-cursor: hand;
+                """);
+
+        btnCerrar.setOnAction(e -> {
+            this.close();
+        });
+
+        HBox contenedorBoton = new HBox(10, btnSugerir, btnCerrar);
         contenedorBoton.setAlignment(Pos.CENTER_RIGHT);
 
-        // Añadimos todo a la sección derecha
-        seccionDerecha.getChildren().addAll(tituloDerecha, listaCanciones, contenedorBoton);
+        seccionDerecha.getChildren().addAll(
+                tituloDerecha,
+                listaCanciones,
+                contenedorBoton
+        );
 
+        this.grupoDistancia = grupo;
+        this.grupoAlgoritmo = grupo2;
 
-        // --------------------------------------------------------------------------------------------------------------------------
+        // =============================================================================================================
         // Principal
-        // Añadimos las dos mitades al principal
+
         principal.getChildren().addAll(seccionIzquierda, seccionDerecha);
-
-        // Diseño del Principal
-        principal.setPadding(new Insets(3, 3, 3, 3));
-        principal.setSpacing(3);
-
-        Scene scene = new Scene(principal, 700, 500);
+        Scene scene = new Scene(principal, 900, 550);
         this.setScene(scene);
-        this.setTitle("Programación Avanzada");
+        this.setTitle("Programacion Avanzada");
+
+        // Icono
+        Image imagen = new Image(getClass().getResourceAsStream("/images/icono.png"));
+        this.getIcons().add(imagen);
+
     }
 
     @Override
