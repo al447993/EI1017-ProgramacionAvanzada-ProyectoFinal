@@ -116,8 +116,6 @@ public class KMeans implements Algorithms<Table, List<Double>, Integer> {
 
         //Buscamos el centroide más cercano
         for (int k = 0; k < numClusters; k++) {
-            //En KNN ya tenemos el metodo para calcular distancias, por lo que lo cogemos
-            //de allí.
             double dist = distancia.calculateDistance(dato, centroides.get(k));
 
             if (dist < minDist) {
